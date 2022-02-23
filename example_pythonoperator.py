@@ -36,15 +36,15 @@ run_this = PythonOperator(
     python_callable=print_context,
     dag=dag)
 
-for i in range(10):
+for i in range(5):
     '''
-    Generating 10 sleeping task, sleeping from 0 to 9 seconds
+    Generating 5 sleeping task, sleeping from 0 to 4 seconds
     respectively
     '''
     task = PythonOperator(
         task_id='sleep_for_'+str(i),
         python_callable=my_sleeping_function,
-        op_kwargs={'random_base': float(i)/10},
+        op_kwargs={'random_base': float(i)/5},
         dag=dag)
 
     task.set_upstream(run_this)
